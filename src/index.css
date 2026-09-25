@@ -1,0 +1,227 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Inter', sans-serif;
+  }
+}
+
+/* Light mode bg-white override for soft eye-friendly gray backgrounds */
+html:not(.dark) .bg-white {
+  background-color: #FFFFFF !important; /* Keep cards white for contrast */
+}
+
+body:not(.dark) {
+  background-color: #e0e7ff !important;
+}
+
+/* Administrative grid/clean background */
+.notebook-grid {
+  background-color: #e0e7ff; /* Índigo Suave */
+}
+
+.dark .notebook-grid {
+  background-color: #090D16; /* Deep dark administrative slate bg */
+}
+
+/* Micro-animations and professional hovers */
+.bouncy-hover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bouncy-hover:hover {
+  transform: translateY(-1.5px);
+}
+
+.bouncy-hover-sm {
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bouncy-hover-sm:hover {
+  transform: translateY(-0.5px);
+}
+
+.bouncy-active:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Custom chalk QR scanner line animation */
+.scan-line {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #3b82f6, #60a5fa, #3b82f6, transparent);
+  animation: scan 2.5s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: 9999px;
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.9);
+}
+
+@keyframes scan {
+  0% { top: 8%; }
+  50% { top: 88%; }
+  100% { top: 8%; }
+}
+
+/* Card student animation */
+.card-alumno-slide {
+  animation: slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-15px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Custom scrollbars - clean and professional */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.25); /* Neutral Slate-500 thumb */
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.45);
+}
+
+/* CSS Print styles for QR Modals */
+@media print {
+  html, body {
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: white !important;
+  }
+  
+  /* Hide all elements on the page */
+  body * {
+    visibility: hidden !important;
+  }
+  
+  /* Render only the QR modal content and its children */
+  .print-qr-modal, .print-qr-modal * {
+    visibility: visible !important;
+  }
+  
+  /* Center and style the QR print area */
+  .print-qr-modal {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 90% !important;
+    max-width: 320px !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: white !important;
+    color: black !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Hide print/close buttons during actual printing */
+  .no-print, .no-print * {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+
+/* Restore Clean Dark Mode Palette matching user screenshot */
+.dark,
+.dark body {
+  background-color: #000000 !important;
+}
+
+.dark header {
+  background-color: #0f172a !important;
+}
+
+.dark aside {
+  background-color: #0f172a !important;
+}
+
+.dark .bg-white,
+.dark .bg-slate-50,
+.dark .bg-slate-100,
+.dark [class*="bg-[#111827]"],
+.dark [class*="bg-[#182234]"],
+.dark [class*="bg-[#1c1c1e]"],
+.dark [class*="bg-[#1E293B]"],
+.dark [class*="bg-[#0f172a]"] {
+  background-color: #1c1c1e !important;
+  color: #ffffff !important;
+}
+
+.dark [class*="z-50"] > div {
+  background-color: #1c1c1e !important;
+  border-color: #2c2c2e !important;
+}
+
+.dark table th {
+  background-color: #1c1c1e !important;
+  color: #94a3b8 !important;
+}
+
+/* Hover effect on table rows */
+.dark tr:hover,
+.dark .hover\:bg-slate-800:hover,
+.dark .hover\:bg-gray-800:hover {
+  background-color: #2c2c2e !important;
+}
+
+/* Inputs and focus states */
+.dark input, 
+.dark select,
+.dark textarea {
+  border-color: #3a3a3c !important;
+  background-color: #1c1c1e !important;
+}
+
+/* iOS thin dark grey borders */
+.dark,
+.dark *,
+.dark border-slate-200,
+.dark [class*="border-slate-"],
+.dark [class*="border-gray-"],
+.dark [class*="border-amber-"],
+.dark [class*="border-blue-"],
+.dark [class*="border-[#"] {
+  border-color: #2c2c2e !important;
+}
+
+/* Table header background adjustment */
+.dark table th {
+  background-color: #1c1c1e !important;
+  color: #8e8e93 !important; /* iOS gray text */
+}
+
+/* Adjust scrollbar thumb for iOS dark mode */
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
