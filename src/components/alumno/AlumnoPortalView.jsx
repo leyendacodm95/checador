@@ -384,7 +384,13 @@ export function AlumnoPortalView({ students, logs = [] }) {
       titleCell.alignment = { vertical: 'middle', horizontal: 'left' };
 
       worksheet.mergeCells('B3:E3');
-      const subtitleCell = worksheet.getCell('B3');
+      const cctCell = worksheet.getCell('B3');
+      cctCell.value = 'CCT: 18DPR0087R';
+      cctCell.font = { name: 'Arial', size: 10, bold: true, color: { argb: '1E3A8A' } };
+      cctCell.alignment = { vertical: 'middle', horizontal: 'left' };
+
+      worksheet.mergeCells('B4:E4');
+      const subtitleCell = worksheet.getCell('B4');
       subtitleCell.value = 'Reporte Semanal de Asistencia Escolar para Padres de Familia';
       subtitleCell.font = { name: 'Arial', size: 10, italic: true, color: { argb: '475569' } };
       subtitleCell.alignment = { vertical: 'middle', horizontal: 'left' };

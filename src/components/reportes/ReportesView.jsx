@@ -589,7 +589,13 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
       titleCell.alignment = { vertical: 'middle', horizontal: 'left' };
 
       worksheet.mergeCells('B3:E3');
-      const subtitleCell = worksheet.getCell('B3');
+      const cctCell = worksheet.getCell('B3');
+      cctCell.value = 'CCT: 18DPR0087R';
+      cctCell.font = { name: 'Arial', size: 10, bold: true, color: { argb: '1E3A8A' } };
+      cctCell.alignment = { vertical: 'middle', horizontal: 'left' };
+
+      worksheet.mergeCells('B4:E4');
+      const subtitleCell = worksheet.getCell('B4');
       subtitleCell.value = 'Bitácora Histórica de Justificantes y Observaciones Activas';
       subtitleCell.font = { name: 'Arial', size: 10, italic: true, color: { argb: '475569' } };
       subtitleCell.alignment = { vertical: 'middle', horizontal: 'left' };
@@ -767,7 +773,13 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
       titleCell.alignment = { vertical: 'middle', horizontal: 'left' };
 
       worksheet.mergeCells('B3:F3');
-      const subtitleCell = worksheet.getCell('B3');
+      const cctCell = worksheet.getCell('B3');
+      cctCell.value = 'CCT: 18DPR0087R';
+      cctCell.font = { name: 'Arial', size: 10, bold: true, color: { argb: '1E3A8A' } };
+      cctCell.alignment = { vertical: 'middle', horizontal: 'left' };
+
+      worksheet.mergeCells('B4:F4');
+      const subtitleCell = worksheet.getCell('B4');
       subtitleCell.value = 'Bitácora Histórica de Registros Eliminados del Sistema';
       subtitleCell.font = { name: 'Arial', size: 10, italic: true, color: { argb: '475569' } };
       subtitleCell.alignment = { vertical: 'middle', horizontal: 'left' };
@@ -927,6 +939,14 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
                   <Download className="w-4 h-4" />
                   <span>Reporte Consolidado del Grupo (PDF)</span>
                 </button>
+                <button
+                  onClick={() => generateAttendanceExcel('alumnos_grupo')}
+                  disabled={generating === 'excel-alumnos_grupo'}
+                  className="flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-xs transition disabled:opacity-50"
+                >
+                  <FileSpreadsheet className="w-4 h-4" />
+                  <span>Exportar Excel del Grupo</span>
+                </button>
               </div>
             </div>
 
@@ -939,10 +959,18 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
                   <button
                     onClick={() => generateTrimestralPDF('docentes_grupo')}
                     disabled={generating === 'pdf-docentes_grupo'}
-                    className="flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-xs transition disabled:opacity-50"
+                    className="flex items-center justify-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl shadow-xs transition disabled:opacity-50"
                   >
                     <Download className="w-4 h-4" />
                     <span>Reporte Consolidado Docentes (PDF)</span>
+                  </button>
+                  <button
+                    onClick={() => generateAttendanceExcel('docentes_grupo')}
+                    disabled={generating === 'excel-docentes_grupo'}
+                    className="flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-xs transition disabled:opacity-50"
+                  >
+                    <FileSpreadsheet className="w-4 h-4" />
+                    <span>Exportar Excel Docentes</span>
                   </button>
                 </div>
               </div>
