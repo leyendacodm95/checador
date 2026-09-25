@@ -1,0 +1,34 @@
+com.checador.app-jetified-annotation-experimental-1.3.0-0 C:\Users\TOSHIBA\.gradle\caches\transforms-4\0014e4ce0547b4428da8c0aca478cac8\transformed\jetified-annotation-experimental-1.3.0\res
+com.checador.app-lifecycle-runtime-2.6.1-1 C:\Users\TOSHIBA\.gradle\caches\transforms-4\07ac293c7bb8fd69bf9152efeff9851f\transformed\lifecycle-runtime-2.6.1\res
+com.checador.app-jetified-appcompat-resources-1.6.1-2 C:\Users\TOSHIBA\.gradle\caches\transforms-4\0a97635559bfb4e74c445d701e994c26\transformed\jetified-appcompat-resources-1.6.1\res
+com.checador.app-jetified-profileinstaller-1.3.0-3 C:\Users\TOSHIBA\.gradle\caches\transforms-4\0aba81fd8707a97aa585a527ecf53ce7\transformed\jetified-profileinstaller-1.3.0\res
+com.checador.app-jetified-emoji2-1.2.0-4 C:\Users\TOSHIBA\.gradle\caches\transforms-4\1272d5949d6479cdf6535932c07c25ec\transformed\jetified-emoji2-1.2.0\res
+com.checador.app-fragment-1.3.6-5 C:\Users\TOSHIBA\.gradle\caches\transforms-4\242becf1c23e1a8f0673762a240c468b\transformed\fragment-1.3.6\res
+com.checador.app-drawerlayout-1.1.1-6 C:\Users\TOSHIBA\.gradle\caches\transforms-4\2f3ddcf76e61f9064b26394626ed106a\transformed\drawerlayout-1.1.1\res
+com.checador.app-jetified-savedstate-1.2.1-7 C:\Users\TOSHIBA\.gradle\caches\transforms-4\3a521f26567b927e8b7ef70bea0815c1\transformed\jetified-savedstate-1.2.1\res
+com.checador.app-appcompat-1.6.1-8 C:\Users\TOSHIBA\.gradle\caches\transforms-4\3fa222f18567b201f5b166e230db839c\transformed\appcompat-1.6.1\res
+com.checador.app-jetified-lifecycle-process-2.6.1-9 C:\Users\TOSHIBA\.gradle\caches\transforms-4\46ee155ec0bc4dfaffb3e0369c014bee\transformed\jetified-lifecycle-process-2.6.1\res
+com.checador.app-constraintlayout-2.1.4-10 C:\Users\TOSHIBA\.gradle\caches\transforms-4\648973f8c09d2bcaab60ceb71fdf5792\transformed\constraintlayout-2.1.4\res
+com.checador.app-lifecycle-livedata-core-2.6.1-11 C:\Users\TOSHIBA\.gradle\caches\transforms-4\7270fc18bc32a80b70e7ade072071744\transformed\lifecycle-livedata-core-2.6.1\res
+com.checador.app-recyclerview-1.1.0-12 C:\Users\TOSHIBA\.gradle\caches\transforms-4\75e6241e2292547980708dc3b5fdfb60\transformed\recyclerview-1.1.0\res
+com.checador.app-transition-1.2.0-13 C:\Users\TOSHIBA\.gradle\caches\transforms-4\7c0ce20168eef5c08cf5636815a5cbfa\transformed\transition-1.2.0\res
+com.checador.app-jetified-startup-runtime-1.1.1-14 C:\Users\TOSHIBA\.gradle\caches\transforms-4\7d19370214ef3ff4bfb9d6b09b892eb4\transformed\jetified-startup-runtime-1.1.1\res
+com.checador.app-jetified-viewpager2-1.0.0-15 C:\Users\TOSHIBA\.gradle\caches\transforms-4\9ee4211bafae4b3ef8126b8120f4793d\transformed\jetified-viewpager2-1.0.0\res
+com.checador.app-jetified-lifecycle-viewmodel-savedstate-2.6.1-16 C:\Users\TOSHIBA\.gradle\caches\transforms-4\a29d5ed0362b86f8ebc61def007b9fc0\transformed\jetified-lifecycle-viewmodel-savedstate-2.6.1\res
+com.checador.app-core-1.9.0-17 C:\Users\TOSHIBA\.gradle\caches\transforms-4\c2fde7f1cba9d6e4038b00a8e4570ef9\transformed\core-1.9.0\res
+com.checador.app-coordinatorlayout-1.1.0-18 C:\Users\TOSHIBA\.gradle\caches\transforms-4\cb023148990f244173b10f189b8459a5\transformed\coordinatorlayout-1.1.0\res
+com.checador.app-lifecycle-viewmodel-2.6.1-19 C:\Users\TOSHIBA\.gradle\caches\transforms-4\d148c2347e8bba83cdc6fea8b751394e\transformed\lifecycle-viewmodel-2.6.1\res
+com.checador.app-jetified-emoji2-views-helper-1.2.0-20 C:\Users\TOSHIBA\.gradle\caches\transforms-4\d24063d0c6977ec86a433e83d1c3797e\transformed\jetified-emoji2-views-helper-1.2.0\res
+com.checador.app-jetified-activity-1.8.0-21 C:\Users\TOSHIBA\.gradle\caches\transforms-4\d408b84c4feea1296d329e0103469341\transformed\jetified-activity-1.8.0\res
+com.checador.app-lifecycle-livedata-2.6.1-22 C:\Users\TOSHIBA\.gradle\caches\transforms-4\dcac73aab3142741643914acfcc9c3e7\transformed\lifecycle-livedata-2.6.1\res
+com.checador.app-cardview-1.0.0-23 C:\Users\TOSHIBA\.gradle\caches\transforms-4\e761a146cb504bd618b271c4076a24d9\transformed\cardview-1.0.0\res
+com.checador.app-material-1.11.0-24 C:\Users\TOSHIBA\.gradle\caches\transforms-4\f0dba299f187a0d9160eb7fc4ea7dba7\transformed\material-1.11.0\res
+com.checador.app-core-runtime-2.2.0-25 C:\Users\TOSHIBA\.gradle\caches\transforms-4\f3e4a6fc6ffb618b11648dc49a2f1f61\transformed\core-runtime-2.2.0\res
+com.checador.app-jetified-core-ktx-1.9.0-26 C:\Users\TOSHIBA\.gradle\caches\transforms-4\fc94ff5b8bfcd23dc7a87ce27d120348\transformed\jetified-core-ktx-1.9.0\res
+com.checador.app-pngs-27 C:\Users\TOSHIBA\Desktop\Proyeccto Servicio Social\Checador-Jesus original antes de que me pasen sus proyectos\native_app\app\build\generated\res\pngs\debug
+com.checador.app-resValues-28 C:\Users\TOSHIBA\Desktop\Proyeccto Servicio Social\Checador-Jesus original antes de que me pasen sus proyectos\native_app\app\build\generated\res\resValues\debug
+com.checador.app-packageDebugResources-29 C:\Users\TOSHIBA\Desktop\Proyeccto Servicio Social\Checador-Jesus original antes de que me pasen sus proyectos\native_app\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.checador.app-packageDebugResources-30 C:\Users\TOSHIBA\Desktop\Proyeccto Servicio Social\Checador-Jesus original antes de que me pasen sus proyectos\native_app\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.checador.app-merged_res-31 C:\Users\TOSHIBA\Desktop\Proyeccto Servicio Social\Checador-Jesus original antes de que me pasen sus proyectos\native_app\app\build\intermediates\merged_res\debug
+com.checador.app-debug-32 C:\Users\TOSHIBA\Desktop\Proyeccto Servicio Social\Checador-Jesus original antes de que me pasen sus proyectos\native_app\app\src\debug\res
+com.checador.app-main-33 C:\Users\TOSHIBA\Desktop\Proyeccto Servicio Social\Checador-Jesus original antes de que me pasen sus proyectos\native_app\app\src\main\res

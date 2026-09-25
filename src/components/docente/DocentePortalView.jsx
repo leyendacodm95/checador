@@ -224,7 +224,13 @@ export function DocentePortalView({ teachers, students, onUpdateStudent }) {
       doc.setTextColor(100, 116, 139);
       doc.text(`ID QR: ${activeTeacher.qrCode}`, 42.5, 109, { align: 'center' });
 
-      doc.save(`Credencial_Docente_${activeTeacher.nombre.replace(/\s+/g, '_')}.pdf`);
+      const filename = `Credencial_Docente_${activeTeacher.nombre.replace(/\s+/g, '_')}.pdf`;
+      if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+        const base64data = doc.output('datauristring');
+        window.AndroidApp.downloadBase64File(base64data, filename, 'application/pdf');
+      } else {
+        doc.save(filename);
+      }
     } catch (e) {
       console.error('Error al generar PDF de docente:', e);
     }

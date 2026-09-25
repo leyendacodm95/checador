@@ -138,7 +138,13 @@ export function AlumnoPortalView({ students, logs = [] }) {
       doc.setTextColor(100, 116, 139);
       doc.text('Válido para Pase de Lista Escolar Automatizado', 42.5, 109, { align: 'center' });
 
-      doc.save(`Credencial_Estudiantil_${currentStudent.nombre.replace(/\s+/g, '_')}.pdf`);
+      const filename = `Credencial_Estudiantil_${currentStudent.nombre.replace(/\s+/g, '_')}.pdf`;
+      if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+        const base64data = doc.output('datauristring');
+        window.AndroidApp.downloadBase64File(base64data, filename, 'application/pdf');
+      } else {
+        doc.save(filename);
+      }
     } catch (err) {
       console.error('Error al generar PDF de credencial estudiantil:', err);
     }
@@ -338,7 +344,13 @@ export function AlumnoPortalView({ students, logs = [] }) {
       doc.text('Firma del Padre o Tutor', 55, finalY + 30, { align: 'center' });
       doc.text('Sello y Firma de la Dirección', 155, finalY + 30, { align: 'center' });
 
-      doc.save(`Reporte_Semanal_${currentStudent.nombre.replace(/\s+/g, '_')}.pdf`);
+      const filename = `Reporte_Semanal_${currentStudent.nombre.replace(/\s+/g, '_')}.pdf`;
+      if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+        const base64data = doc.output('datauristring');
+        window.AndroidApp.downloadBase64File(base64data, filename, 'application/pdf');
+      } else {
+        doc.save(filename);
+      }
     } catch (err) {
       console.error('Error generando PDF semanal:', err);
       alert('Ocurrió un error generando el reporte PDF.');
@@ -470,11 +482,18 @@ export function AlumnoPortalView({ students, logs = [] }) {
       // Write Buffer & Trigger Download
       const buffer = await workbook.xlsx.writeBuffer();
       const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `Reporte_Semanal_${currentStudent.nombre.replace(/\s+/g, '_')}.xlsx`;
-      a.click();
+      const filename = `Reporte_Semanal_${currentStudent.nombre.replace(/\s+/g, '_')}.xlsx`;
+      if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+        const reader = new FileReader();
+        reader.onloadend = () => window.AndroidApp.downloadBase64File(reader.result, filename, blob.type);
+        reader.readAsDataURL(blob);
+      } else {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+      }
     } catch (err) {
       console.error('Error generando Excel semanal:', err);
       alert('Ocurrió un error generando el reporte Excel.');

@@ -692,7 +692,13 @@ export function CalendarioSepView() {
       doc.text('SELLO DE LA ESCUELA', 150, finalY + 6, { align: 'center' });
     }
 
-    doc.save(`Calendario_Escolar_SEP_2026_2027.pdf`);
+    const filename = `Calendario_Escolar_SEP_2026_2027.pdf`;
+    if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+      const base64data = doc.output('datauristring');
+      window.AndroidApp.downloadBase64File(base64data, filename, 'application/pdf');
+    } else {
+      doc.save(filename);
+    }
   };
 
   // Standardized Excel Export WITH EMBEDDED SCHOOL LOGO
@@ -762,12 +768,19 @@ export function CalendarioSepView() {
 
     const buffer = await workbook.xlsx.writeBuffer();
     const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `Calendario_Escolar_SEP_2026_2027.xlsx`;
-    link.click();
-    URL.revokeObjectURL(url);
+    const filename = `Calendario_Escolar_SEP_2026_2027.xlsx`;
+    if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+      const reader = new FileReader();
+      reader.onloadend = () => window.AndroidApp.downloadBase64File(reader.result, filename, blob.type);
+      reader.readAsDataURL(blob);
+    } else {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
   };
 
   return (

@@ -88,14 +88,23 @@ export function GroupedAttendanceView({ students, teachers, logs, users = [], on
   // Safe client-side Blob download helpers
   const saveAsBlob = (data, filename, mimeType) => {
     const blob = new Blob([data], { type: mimeType });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.click();
-    setTimeout(() => {
-      URL.revokeObjectURL(url);
-    }, 100);
+    if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+      const reader = new FileReader();
+      reader.onloadend = function() {
+          const base64data = reader.result;                
+          window.AndroidApp.downloadBase64File(base64data, filename, mimeType);
+      }
+      reader.readAsDataURL(blob);
+    } else {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+      }, 100);
+    }
   };
 
   const saveExcel = (workbook, filename) => {
@@ -508,11 +517,18 @@ export function GroupedAttendanceView({ students, teachers, logs, users = [], on
 
       const buffer = await workbook.xlsx.writeBuffer();
       const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `Reporte_Asistencias_${getPeriodLabel()}.xlsx`;
-      a.click();
+      const filename = `Reporte_Asistencias_${getPeriodLabel()}.xlsx`;
+      if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+        const reader = new FileReader();
+        reader.onloadend = () => window.AndroidApp.downloadBase64File(reader.result, filename, blob.type);
+        reader.readAsDataURL(blob);
+      } else {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+      }
     } catch (err) {
       console.error('Error generando Excel:', err);
       alert('Ocurrió un error al generar el archivo Excel.');
@@ -613,7 +629,13 @@ export function GroupedAttendanceView({ students, teachers, logs, users = [], on
       doc.text('Firma del Docente / Responsable', 55, finalY + 30, { align: 'center' });
       doc.text('Sello y Firma de la Dirección', 155, finalY + 30, { align: 'center' });
 
-      doc.save(`Reporte_Asistencias_${getPeriodLabel()}.pdf`);
+      const filename = `Reporte_Asistencias_${getPeriodLabel()}.pdf`;
+      if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+        const base64data = doc.output('datauristring');
+        window.AndroidApp.downloadBase64File(base64data, filename, 'application/pdf');
+      } else {
+        doc.save(filename);
+      }
     } catch (err) {
       console.error('Error generando PDF de asistencias:', err);
       alert('Ocurrió un error al generar el PDF.');

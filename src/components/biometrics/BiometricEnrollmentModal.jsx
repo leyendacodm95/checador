@@ -20,9 +20,10 @@ export function BiometricEnrollmentModal({ isOpen, onClose, onEnroll, userName }
 
     const loadModels = async () => {
       try {
-        await faceapi.nets.ssdMobilenetv1.loadFromUri('/models');
-        await faceapi.nets.faceLandmark68Net.loadFromUri('/models');
-        await faceapi.nets.faceRecognitionNet.loadFromUri('/models');
+        const modelPath = window.AndroidApp ? 'https://leyendacodm95.github.io/checador/models' : './models';
+        await faceapi.nets.ssdMobilenetv1.loadFromUri(modelPath);
+        await faceapi.nets.faceLandmark68Net.loadFromUri(modelPath);
+        await faceapi.nets.faceRecognitionNet.loadFromUri(modelPath);
         setIsModelLoaded(true);
         setStatus('Cámara lista. Ubica tu rostro en el centro.');
       } catch (err) {

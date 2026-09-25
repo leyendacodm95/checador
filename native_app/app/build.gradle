@@ -1,0 +1,74 @@
+import groovy.json.JsonSlurper
+import groovy.json.JsonBuilder
+
+plugins {
+    id 'com.android.application'
+}
+
+def versionFile = file('../../public/version.json')
+def distVersionFile = file('../../dist/version.json')
+def jsonSlurper = new JsonSlurper()
+def versionData = jsonSlurper.parseText(versionFile.text)
+
+def currentVersionCode = versionData.versionCode as int
+def currentVersionName = versionData.versionName as String
+
+android {
+    namespace 'com.checador.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.checador.app"
+        minSdk 24
+        targetSdk 34
+        versionCode currentVersionCode
+        versionName currentVersionName
+    }
+
+    applicationVariants.all { variant ->
+        // 1. Renombrar el APK de salida
+        variant.outputs.all { output ->
+            def apkName = "Checador_V${currentVersionName}.apk"
+            output.outputFileName = apkName
+        }
+
+        // 2. Tareas al finalizar el ensamblado del APK
+        variant.assembleProvider.configure { assembleTask ->
+            assembleTask.doLast {
+                // A) Copiar a "Versiones APK"
+                def apkFolder = file("../../Versiones APK")
+                if (!apkFolder.exists()) {
+                    apkFolder.mkdirs()
+                }
+                
+                def builtApk = variant.outputs.first().outputFile
+                if (builtApk && builtApk.exists()) {
+                    copy {
+                        from builtApk
+                        into apkFolder
+                    }
+                    println "========================================================"
+                    println "✓ APK de copia de seguridad guardado en: ${apkFolder.absolutePath}\\${builtApk.name}"
+                    println "========================================================"
+                }
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+}

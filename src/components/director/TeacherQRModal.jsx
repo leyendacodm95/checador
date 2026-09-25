@@ -114,7 +114,13 @@ export function TeacherQRModal({ teacher, isOpen, onClose }) {
       doc.setTextColor(100, 116, 139);
       doc.text('Válido para Pase de Lista del Personal Docente', 42.5, 109, { align: 'center' });
 
-      doc.save(`Credencial_Docente_${(teacher.nombre || "").replace(/\s+/g, '_')}.pdf`);
+      const filename = `Credencial_Docente_${(teacher.nombre || "").replace(/\s+/g, '_')}.pdf`;
+      if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+        const base64data = doc.output('datauristring');
+        window.AndroidApp.downloadBase64File(base64data, filename, 'application/pdf');
+      } else {
+        doc.save(filename);
+      }
     } catch (err) {
       console.error('Error al generar PDF de credencial docente:', err);
     }

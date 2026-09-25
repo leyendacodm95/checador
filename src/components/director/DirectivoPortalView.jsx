@@ -164,7 +164,13 @@ export function DirectivoPortalView() {
       doc.setTextColor(100, 116, 139);
       doc.text(`ID QR: ${qrCodeStr}`, 42.5, 109, { align: 'center' });
 
-      doc.save(`Credencial_Directiva_${name.replace(/\s+/g, '_')}.pdf`);
+      const filename = `Credencial_Directiva_${name.replace(/\s+/g, '_')}.pdf`;
+      if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+        const base64data = doc.output('datauristring');
+        window.AndroidApp.downloadBase64File(base64data, filename, 'application/pdf');
+      } else {
+        doc.save(filename);
+      }
     } catch (e) {
       console.error('Error al generar PDF directivo:', e);
     }

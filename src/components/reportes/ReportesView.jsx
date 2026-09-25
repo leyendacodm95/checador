@@ -246,7 +246,13 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
         doc.text(`Hoja ${i}/${pageCount}`, doc.internal.pageSize.width - 15, doc.internal.pageSize.height - 10, { align: 'right' });
       }
 
-      doc.save(`Reporte_Trimestral_${reportType}_${new Date().toISOString().slice(0, 10)}.pdf`);
+      const filename = `Reporte_Trimestral_${reportType}_${new Date().toISOString().slice(0, 10)}.pdf`;
+      if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+        const base64data = doc.output('datauristring');
+        window.AndroidApp.downloadBase64File(base64data, filename, 'application/pdf');
+      } else {
+        doc.save(filename);
+      }
     } catch (e) {
       console.error('Error generando PDF Trimestral:', e);
       alert('Error al generar PDF Trimestral.');
@@ -346,7 +352,13 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
         doc.text(`Hoja ${i}/${pageCount}`, doc.internal.pageSize.width - 15, doc.internal.pageSize.height - 10, { align: 'right' });
       }
 
-      doc.save(`Reporte_Asistencia_${type}_${new Date().toISOString().slice(0, 10)}.pdf`);
+      const filename = `Reporte_Asistencia_${type}_${new Date().toISOString().slice(0, 10)}.pdf`;
+      if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+        const base64data = doc.output('datauristring');
+        window.AndroidApp.downloadBase64File(base64data, filename, 'application/pdf');
+      } else {
+        doc.save(filename);
+      }
     } catch (e) {
       console.error('Error generando PDF asistencia:', e);
       alert('Error al generar PDF de asistencias.');
@@ -484,11 +496,18 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
 
       const buffer = await workbook.xlsx.writeBuffer();
       const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `Reporte_Trimestral_${reportType}_${new Date().toISOString().slice(0, 10)}.xlsx`;
-      a.click();
+      const filename = `Reporte_Trimestral_${reportType}_${new Date().toISOString().slice(0, 10)}.xlsx`;
+      if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+        const reader = new FileReader();
+        reader.onloadend = () => window.AndroidApp.downloadBase64File(reader.result, filename, blob.type);
+        reader.readAsDataURL(blob);
+      } else {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+      }
     } catch (e) {
       console.error('Error generando Excel:', e);
       alert('Error al generar archivo Excel.');
@@ -564,7 +583,13 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
       doc.text('Firma del Responsable', 55, finalY + 30, { align: 'center' });
       doc.text('Sello y Firma de la Dirección', 155, finalY + 30, { align: 'center' });
 
-      doc.save(`Reporte_Justificantes_${new Date().toISOString().slice(0, 10)}.pdf`);
+      const filename = `Reporte_Justificantes_${new Date().toISOString().slice(0, 10)}.pdf`;
+      if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+        const base64data = doc.output('datauristring');
+        window.AndroidApp.downloadBase64File(base64data, filename, 'application/pdf');
+      } else {
+        doc.save(filename);
+      }
     } catch (e) {
       console.error('Error generando PDF justificantes:', e);
       alert('Error al generar PDF de justificantes.');
@@ -669,11 +694,18 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
 
       const buffer = await workbook.xlsx.writeBuffer();
       const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `Reporte_Justificantes_${new Date().toISOString().slice(0, 10)}.xlsx`;
-      a.click();
+      const filename = `Reporte_Justificantes_${new Date().toISOString().slice(0, 10)}.xlsx`;
+      if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+        const reader = new FileReader();
+        reader.onloadend = () => window.AndroidApp.downloadBase64File(reader.result, filename, blob.type);
+        reader.readAsDataURL(blob);
+      } else {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+      }
     } catch (e) {
       console.error('Error generando Excel justificantes:', e);
       alert('Error al generar archivo Excel.');
@@ -747,7 +779,13 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
       doc.text('Firma del Responsable', 55, finalY + 30, { align: 'center' });
       doc.text('Sello y Firma de la Dirección', 155, finalY + 30, { align: 'center' });
 
-      doc.save(`Reporte_Eliminaciones_${new Date().toISOString().slice(0, 10)}.pdf`);
+      const filename = `Reporte_Eliminaciones_${new Date().toISOString().slice(0, 10)}.pdf`;
+      if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+        const base64data = doc.output('datauristring');
+        window.AndroidApp.downloadBase64File(base64data, filename, 'application/pdf');
+      } else {
+        doc.save(filename);
+      }
     } catch (e) {
       console.error('Error generando PDF eliminaciones:', e);
       alert('Error al generar PDF de eliminaciones.');
@@ -855,11 +893,18 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
 
       const buffer = await workbook.xlsx.writeBuffer();
       const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `Reporte_Eliminaciones_${new Date().toISOString().slice(0, 10)}.xlsx`;
-      a.click();
+      const filename = `Reporte_Eliminaciones_${new Date().toISOString().slice(0, 10)}.xlsx`;
+      if (window.AndroidApp && window.AndroidApp.downloadBase64File) {
+        const reader = new FileReader();
+        reader.onloadend = () => window.AndroidApp.downloadBase64File(reader.result, filename, blob.type);
+        reader.readAsDataURL(blob);
+      } else {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+      }
     } catch (e) {
       console.error('Error generando Excel eliminaciones:', e);
       alert('Error al generar archivo Excel.');
