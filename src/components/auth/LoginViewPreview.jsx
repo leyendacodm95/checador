@@ -105,6 +105,7 @@ export function LoginViewPreview() {
             <h2 className="text-lg font-black font-outfit text-slate-800 dark:text-white leading-tight">
               Sor Juana Inés de la Cruz T.V
             </h2>
+            <span className="text-[11px] text-blue-500 dark:text-blue-400 mt-0.5 block font-bold">CCT: 18DPR0087R</span>
             <p className="text-[10px] text-slate-400 dark:text-[#8e8e93] font-bold uppercase tracking-wider mt-1">
               Sistema de Acceso Escolar
             </p>

@@ -75,11 +75,14 @@ export function StudentQRModal({ student, isOpen, onClose }) {
       doc.setFontSize(8);
       doc.setFont('helvetica', 'bold');
       doc.text('ESCUELA PRIMARIA', 26, 9);
-      doc.text('Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)', 26, 13);
+      doc.text('Sor Juana Inés de la Cruz T.V', 26, 13);
+      doc.setFontSize(6);
+      doc.setFont('helvetica', 'normal');
+      doc.text('CCT: 18DPR0087R', 26, 17);
 
       doc.setFontSize(6);
       doc.setFont('helvetica', 'normal');
-      doc.text('CREDENCIAL ESTUDIANTIL DIGITAL', 26, 18);
+      doc.text('CREDENCIAL ESTUDIANTIL DIGITAL', 26, 21);
 
       // Student Name & Grade
       doc.setTextColor(15, 23, 42);

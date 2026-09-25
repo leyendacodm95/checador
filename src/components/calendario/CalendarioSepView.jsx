@@ -643,7 +643,10 @@ export function CalendarioSepView() {
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(13);
     doc.setFont('helvetica', 'bold');
-    doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)', 115, 12, { align: 'center' });
+    doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V', 115, 12, { align: 'center' });
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.text('CCT: 18DPR0087R', 115, 17, { align: 'center' });
 
     doc.setFontSize(9);
     doc.setFont('helvetica', 'normal');

@@ -99,11 +99,14 @@ export function AlumnoPortalView({ students, logs = [] }) {
       doc.setFontSize(8);
       doc.setFont('helvetica', 'bold');
       doc.text('ESCUELA PRIMARIA', 26, 9);
-      doc.text('Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)', 26, 13);
+      doc.text('Sor Juana Inés de la Cruz T.V', 26, 13);
+      doc.setFontSize(6);
+      doc.setFont('helvetica', 'normal');
+      doc.text('CCT: 18DPR0087R', 26, 17);
 
       doc.setFontSize(6);
       doc.setFont('helvetica', 'normal');
-      doc.text('CREDENCIAL ESTUDIANTIL DIGITAL', 26, 18);
+      doc.text('CREDENCIAL ESTUDIANTIL DIGITAL', 26, 21);
 
       // Student Name & Grade
       doc.setTextColor(15, 23, 42);
@@ -270,11 +273,14 @@ export function AlumnoPortalView({ students, logs = [] }) {
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(13);
       doc.setFont('helvetica', 'bold');
-      doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)', 42, 16);
+      doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V', 42, 16);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'normal');
+      doc.text('CCT: 18DPR0087R', 42, 21);
 
       doc.setFontSize(9);
       doc.setFont('helvetica', 'normal');
-      doc.text('Sistema de Control de Asistencia — Reporte Semanal para Padres de Familia', 42, 24);
+      doc.text('Sistema de Control de Asistencia — Reporte Semanal para Padres de Familia', 42, 26);
 
       // Student Info Box
       doc.setTextColor(30, 41, 59);
@@ -373,7 +379,7 @@ export function AlumnoPortalView({ students, logs = [] }) {
       // Title Block
       worksheet.mergeCells('B2:E2');
       const titleCell = worksheet.getCell('B2');
-      titleCell.value = 'ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)';
+      titleCell.value = 'ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V';
       titleCell.font = { name: 'Arial', size: 14, bold: true, color: { argb: '1E3A8A' } };
       titleCell.alignment = { vertical: 'middle', horizontal: 'left' };
 

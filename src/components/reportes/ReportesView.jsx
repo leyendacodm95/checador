@@ -122,11 +122,14 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(13);
       doc.setFont('helvetica', 'bold');
-      doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)', 42, 16);
+      doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V', 42, 16);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'normal');
+      doc.text('CCT: 18DPR0087R', 42, 21);
 
       doc.setFontSize(9);
       doc.setFont('helvetica', 'normal');
-      doc.text(`Sistema Checador — Reporte Trimestral de Asistencia por Excepción`, 42, 24);
+      doc.text(`Sistema Checador — Reporte Trimestral de Asistencia por Excepción`, 42, 26);
 
       // Determine date range (Last 90 days)
       const endDate = new Date();
@@ -270,11 +273,14 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(13);
       doc.setFont('helvetica', 'bold');
-      doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)', 42, 16);
+      doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V', 42, 16);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'normal');
+      doc.text('CCT: 18DPR0087R', 42, 21);
 
       doc.setFontSize(9);
       doc.setFont('helvetica', 'normal');
-      doc.text(`Sistema Checador — Reporte de Asistencia ${type.toUpperCase()}`, 42, 24);
+      doc.text(`Sistema Checador — Reporte de Asistencia ${type.toUpperCase()}`, 42, 26);
 
       doc.setTextColor(30, 41, 59);
       doc.setFontSize(10);
@@ -380,12 +386,18 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
       // Title Block
       worksheet.mergeCells('B2:G2');
       const titleCell = worksheet.getCell('B2');
-      titleCell.value = 'ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)';
+      titleCell.value = 'ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V';
       titleCell.font = { name: 'Arial', size: 14, bold: true, color: { argb: '1E3A8A' } };
       titleCell.alignment = { vertical: 'middle', horizontal: 'left' };
 
       worksheet.mergeCells('B3:G3');
-      const subtitleCell = worksheet.getCell('B3');
+      const cctCell = worksheet.getCell('B3');
+      cctCell.value = 'CCT: 18DPR0087R';
+      cctCell.font = { name: 'Arial', size: 10, bold: true, color: { argb: '1E3A8A' } };
+      cctCell.alignment = { vertical: 'middle', horizontal: 'left' };
+
+      worksheet.mergeCells('B4:G4');
+      const subtitleCell = worksheet.getCell('B4');
       subtitleCell.value = `Reporte de Asistencias (${type.toUpperCase()})`;
       subtitleCell.font = { name: 'Arial', size: 10, italic: true, color: { argb: '475569' } };
       subtitleCell.alignment = { vertical: 'middle', horizontal: 'left' };
@@ -484,11 +496,14 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(13);
       doc.setFont('helvetica', 'bold');
-      doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)', 42, 16);
+      doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V', 42, 16);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'normal');
+      doc.text('CCT: 18DPR0087R', 42, 21);
 
       doc.setFontSize(9);
       doc.setFont('helvetica', 'normal');
-      doc.text('Sistema Checador — Bitácora Histórica de Justificantes y Observaciones', 42, 24);
+      doc.text('Sistema Checador — Bitácora Histórica de Justificantes y Observaciones', 42, 26);
 
       doc.setTextColor(30, 41, 59);
       doc.setFontSize(10);
@@ -569,7 +584,7 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
       // Title Block
       worksheet.mergeCells('B2:E2');
       const titleCell = worksheet.getCell('B2');
-      titleCell.value = 'ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)';
+      titleCell.value = 'ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V';
       titleCell.font = { name: 'Arial', size: 14, bold: true, color: { argb: '1E3A8A' } };
       titleCell.alignment = { vertical: 'middle', horizontal: 'left' };
 
@@ -658,11 +673,14 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(13);
       doc.setFont('helvetica', 'bold');
-      doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)', 42, 16);
+      doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V', 42, 16);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'normal');
+      doc.text('CCT: 18DPR0087R', 42, 21);
 
       doc.setFontSize(9);
       doc.setFont('helvetica', 'normal');
-      doc.text('Sistema Checador — Bitácora Histórica de Eliminaciones del Sistema', 42, 24);
+      doc.text('Sistema Checador — Bitácora Histórica de Eliminaciones del Sistema', 42, 26);
 
       doc.setTextColor(30, 41, 59);
       doc.setFontSize(10);
@@ -744,7 +762,7 @@ export function ReportesView({ students, teachers, logs = [], deletions = [], on
       // Title Block
       worksheet.mergeCells('B2:F2');
       const titleCell = worksheet.getCell('B2');
-      titleCell.value = 'ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)';
+      titleCell.value = 'ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V';
       titleCell.font = { name: 'Arial', size: 14, bold: true, color: { argb: '1E3A8A' } };
       titleCell.alignment = { vertical: 'middle', horizontal: 'left' };
 

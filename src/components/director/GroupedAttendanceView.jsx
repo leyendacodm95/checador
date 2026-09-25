@@ -418,12 +418,18 @@ export function GroupedAttendanceView({ students, teachers, logs, users = [], on
       // Title Block
       worksheet.mergeCells('B2:I2');
       const titleCell = worksheet.getCell('B2');
-      titleCell.value = 'ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)';
+      titleCell.value = 'ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V';
       titleCell.font = { name: 'Arial', size: 14, bold: true, color: { argb: '1E3A8A' } };
       titleCell.alignment = { vertical: 'middle', horizontal: 'left' };
 
       worksheet.mergeCells('B3:I3');
-      const subtitleCell = worksheet.getCell('B3');
+      const cctCell = worksheet.getCell('B3');
+      cctCell.value = 'CCT: 18DPR0087R';
+      cctCell.font = { name: 'Arial', size: 10, bold: true, color: { argb: '1E3A8A' } };
+      cctCell.alignment = { vertical: 'middle', horizontal: 'left' };
+
+      worksheet.mergeCells('B4:I4');
+      const subtitleCell = worksheet.getCell('B4');
       subtitleCell.value = `Reporte General de Registros de Asistencia (${getPeriodText()})`;
       subtitleCell.font = { name: 'Arial', size: 10, italic: true, color: { argb: '475569' } };
       subtitleCell.alignment = { vertical: 'middle', horizontal: 'left' };
@@ -529,11 +535,14 @@ export function GroupedAttendanceView({ students, teachers, logs, users = [], on
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(13);
       doc.setFont('helvetica', 'bold');
-      doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)', 42, 16);
+      doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V', 42, 16);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'normal');
+      doc.text('CCT: 18DPR0087R', 42, 21);
 
       doc.setFontSize(9);
       doc.setFont('helvetica', 'normal');
-      doc.text(`Sistema Checador — Registros del Día / Historial (${getPeriodText()})`, 42, 24);
+      doc.text(`Sistema Checador — Registros del Día / Historial (${getPeriodText()})`, 42, 26);
 
       // Info Box
       doc.setTextColor(30, 41, 59);
