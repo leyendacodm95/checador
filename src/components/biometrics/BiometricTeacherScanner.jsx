@@ -53,9 +53,9 @@ export function BiometricTeacherScanner({ users, isPaused, onSuccess, onCancel }
   useEffect(() => {
     const loadModels = async () => {
       try {
-        await faceapi.nets.ssdMobilenetv1.loadFromUri('/models');
-        await faceapi.nets.faceLandmark68Net.loadFromUri('/models');
-        await faceapi.nets.faceRecognitionNet.loadFromUri('/models');
+        await faceapi.nets.ssdMobilenetv1.loadFromUri('./models');
+        await faceapi.nets.faceLandmark68Net.loadFromUri('./models');
+        await faceapi.nets.faceRecognitionNet.loadFromUri('./models');
         setIsModelLoaded(true);
         setStatus('Cámara lista. Acércate para tomar tu asistencia.');
         setIsScanning(true);
@@ -211,7 +211,7 @@ export function BiometricTeacherScanner({ users, isPaused, onSuccess, onCancel }
             {!isModelLoaded && (
               <div className="absolute inset-0 bg-slate-900/90 flex flex-col items-center justify-center text-white p-4 text-center z-20">
                 <Loader2 className="w-8 h-8 text-emerald-500 animate-spin mb-2" />
-                <p className="text-xs font-bold">Cargando Inteligencia Artificial...</p>
+                <p className="text-xs font-bold">Cargando Cálculo Automático...</p>
               </div>
             )}
           </div>
