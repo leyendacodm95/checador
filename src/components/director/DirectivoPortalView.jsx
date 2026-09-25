@@ -10,18 +10,24 @@ import jsPDF from 'jspdf';
 
 // Helper to load logo as Base64 for PDF export
 const getBase64ImageFromUrl = async (imgUrl) => {
-  try {
-    const res = await fetch(imgUrl);
-    const blob = await res.blob();
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result);
-      reader.onerror = () => resolve(null);
-      reader.readAsDataURL(blob);
-    });
-  } catch (e) {
-    return null;
-  }
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        resolve(canvas.toDataURL('image/png'));
+      } catch (e) {
+        console.warn('Canvas toDataURL failed:', e);
+        resolve(null);
+      }
+    };
+    img.onerror = () => resolve(null);
+    img.src = imgUrl;
+  });
 };
 
 // Helper to convert QR SVG to PNG Data URL
