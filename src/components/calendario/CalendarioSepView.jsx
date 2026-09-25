@@ -634,23 +634,23 @@ export function CalendarioSepView() {
     const logoBase64 = await getBase64ImageFromUrl(schoolLogo);
 
     doc.setFillColor(30, 58, 138);
-    doc.rect(0, 0, 210, 26, 'F');
+    doc.rect(0, 0, 210, 28, 'F');
 
     if (logoBase64) {
-      try { doc.addImage(logoBase64, 'PNG', 12, 3, 20, 20); } catch (e) { }
+      try { doc.addImage(logoBase64, 'PNG', 12, 4, 18, 18); } catch (e) { }
     }
 
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(13);
     doc.setFont('helvetica', 'bold');
-    doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V', 115, 12, { align: 'center' });
+    doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V', 115, 10, { align: 'center' });
     doc.setFontSize(8);
     doc.setFont('helvetica', 'normal');
-    doc.text('CCT: 18DPR0087R', 115, 17, { align: 'center' });
+    doc.text('CCT: 18DPR0087R', 115, 16, { align: 'center' });
 
     doc.setFontSize(9);
     doc.setFont('helvetica', 'normal');
-    doc.text('CALENDARIO ESCOLAR OFICIAL SEP DE EDUCACIÓN BÁSICA — 2026-2027', 115, 18, { align: 'center' });
+    doc.text('CALENDARIO ESCOLAR OFICIAL SEP DE EDUCACIÓN BÁSICA — 2026-2027', 115, 22, { align: 'center' });
 
     doc.setTextColor(30, 41, 59);
     doc.setFontSize(10);

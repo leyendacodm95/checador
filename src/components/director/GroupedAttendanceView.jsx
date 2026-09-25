@@ -529,16 +529,16 @@ export function GroupedAttendanceView({ students, teachers, logs, users = [], on
       doc.rect(0, 0, 210, 36, 'F');
 
       if (logoBase64) {
-        doc.addImage(logoBase64, 'PNG', 12, 5, 26, 26);
+        doc.addImage(logoBase64, 'PNG', 12, 5, 20, 20);
       }
 
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(13);
       doc.setFont('helvetica', 'bold');
-      doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V', 42, 16);
+      doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V', 42, 14);
       doc.setFontSize(8);
       doc.setFont('helvetica', 'normal');
-      doc.text('CCT: 18DPR0087R', 42, 21);
+      doc.text('CCT: 18DPR0087R', 42, 20);
 
       doc.setFontSize(9);
       doc.setFont('helvetica', 'normal');
