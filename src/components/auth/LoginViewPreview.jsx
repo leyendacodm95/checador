@@ -67,7 +67,7 @@ export function LoginViewPreview() {
     { id: 'Intendente', label: 'Intendente', subtitle: 'Intendencia / Apoyo', code: 'INTENDENTE-01', hasLimit: true, max: 1 },
     { id: 'Educación Física', label: 'Educación Física', subtitle: 'Deporte / Activación', code: 'EDFISICA-01', hasLimit: true, max: 3 },
     { id: 'Psicología', label: 'Psicología', subtitle: 'Orientación Escolar', code: 'PSICO-01', hasLimit: true, max: 1 },
-    { id: 'Docente Auxiliar', label: 'Docente Auxiliar', subtitle: 'Practicante o Pasante', code: 'AUXILIAR-01', hasLimit: false },
+    { id: 'Docente Auxiliar', label: 'Docente Auxiliar', subtitle: '', code: 'AUXILIAR-01', hasLimit: false },
     { id: 'Servicio Social', label: 'Servicio Social', subtitle: 'Apoyo', code: 'SERVICIO-01', hasLimit: false },
     { id: 'Prácticas Profesionales', label: 'Prácticas Prof.', subtitle: 'Desarrollo', code: 'PRACTICAS-01', hasLimit: false }
   ];

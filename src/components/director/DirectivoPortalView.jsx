@@ -124,7 +124,7 @@ export function DirectivoPortalView() {
       doc.setFontSize(8);
       doc.setFont('helvetica', 'bold');
       doc.text('ESCUELA PRIMARIA', 26, 9);
-      doc.text('Sor Juana Inés de la Cruz T.V', 26, 13);
+      doc.text('Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)', 26, 13);
 
       doc.setFontSize(6);
       doc.setFont('helvetica', 'normal');
@@ -180,7 +180,7 @@ export function DirectivoPortalView() {
             Credencial Oficial — {roleTitle}
           </h1>
           <p className="text-xs text-blue-100/80 mt-1 max-w-xl font-medium">
-            Credencial virtual oficial con código QR institucional para la identificación y acceso del personal directivo de la Escuela Primaria Sor Juana Inés de la Cruz.
+            Credencial virtual oficial con código QR institucional para la identificación y acceso del personal directivo de la Escuela Primaria Sor Juana Inés de la Cruz (CCT: 18DPR0087R).
           </p>
         </div>
 

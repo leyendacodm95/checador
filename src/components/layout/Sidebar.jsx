@@ -73,6 +73,11 @@ export function Sidebar({ open, onClose }) {
       items = items.filter(item => item.label !== 'Respaldo');
     }
 
+    // Hide "Historial" for USAER
+    if (rLower.includes('usaer') || rLower.includes('educación especial')) {
+      items = items.filter(item => item.label !== 'Historial');
+    }
+
     return items;
   };
 
@@ -105,7 +110,10 @@ export function Sidebar({ open, onClose }) {
               <span className="font-outfit font-extrabold text-sm tracking-tight text-white leading-tight">
                 Sor Juana Inés de la Cruz T.V
               </span>
-              <span className="text-[10px] text-blue-200 font-bold uppercase tracking-wider mt-1 opacity-90">
+              <span className="text-[11px] text-blue-200 font-bold tracking-wider mt-0.5 opacity-90">
+                CCT: 18DPR0087R
+              </span>
+              <span className="text-[10px] text-blue-300 font-bold uppercase tracking-wider mt-1 opacity-80">
                 Escuela Primaria
               </span>
             </div>

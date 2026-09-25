@@ -5,6 +5,7 @@ import { db } from '../../lib/firebase';
 import { EditTeacherModal } from '../alumnos/EditTeacherModal';
 import { ProfileModal } from '../common/ProfileModal';
 import { ConfirmDeleteModal } from '../common/ConfirmDeleteModal';
+import { ConfirmActionModal } from '../common/ConfirmActionModal';
 import { TeacherQRModal } from './TeacherQRModal';
 import { useAuth } from '../../context/AuthContext';
 
@@ -23,6 +24,7 @@ export function DocentesView({ teachers, onUpdateTeacher, onDeleteTeacher }) {
   const [selectedProfile, setSelectedProfile] = useState(null);
   const [selectedTeacherQR, setSelectedTeacherQR] = useState(null);
   const [successCredentials, setSuccessCredentials] = useState(null);
+  const [pendingAction, setPendingAction] = useState(null);
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [newNombre, setNewNombre] = useState('');
@@ -155,19 +157,17 @@ export function DocentesView({ teachers, onUpdateTeacher, onDeleteTeacher }) {
 
   const handleRemoveTeacher = async (item) => {
     if (!item) return;
-    if (window.confirm(`¿Quitar al docente ${item.nombre} de este salón? Pasará a la lista de docentes sin asignar.`)) {
-      // If it is titular, reset group roster slot
-      if (item.tipoDocente === 'Titular') {
-        onUpdateTeacher(item.key, {
-          nombre: 'Sin docente asignado',
-          observaciones: '—'
-        });
+    setPendingAction({
+      message: `¿Quitar al docente ${item.nombre} de este salón? Pasará a la lista de docentes sin asignar.`,
+      action: async () => {
+        if (item.tipoDocente === 'Titular') {
+          onUpdateTeacher(item.key, { nombre: 'Sin docente asignado', observaciones: '—' });
+        }
+        if (item.username) {
+          await updateUserGroupAndType(item.username, '', '');
+        }
       }
-      // If it is a user account, clear group and type in Firestore
-      if (item.username) {
-        await updateUserGroupAndType(item.username, '', '');
-      }
-    }
+    });
   };
 
   const handleSaveTeacherEdit = async (gradeGroupKey, teacherData) => {
@@ -1147,6 +1147,17 @@ export function DocentesView({ teachers, onUpdateTeacher, onDeleteTeacher }) {
       />
 
       {/* Confirm Delete Teacher Modal */}
+
+      <ConfirmActionModal
+        isOpen={!!pendingAction}
+        title="Confirmar asignación"
+        message={pendingAction?.message}
+        onConfirm={() => {
+          if (pendingAction?.action) pendingAction.action();
+        }}
+        onClose={() => setPendingAction(null)}
+      />
+
       <ConfirmDeleteModal
         isOpen={!!deletingTeacher}
         title="¿Dar de baja a Docente?"
@@ -1158,6 +1169,17 @@ export function DocentesView({ teachers, onUpdateTeacher, onDeleteTeacher }) {
       />
 
       {/* Confirm Delete Subdirector Modal */}
+
+      <ConfirmActionModal
+        isOpen={!!pendingAction}
+        title="Confirmar asignación"
+        message={pendingAction?.message}
+        onConfirm={() => {
+          if (pendingAction?.action) pendingAction.action();
+        }}
+        onClose={() => setPendingAction(null)}
+      />
+
       <ConfirmDeleteModal
         isOpen={!!deletingSubdirector}
         title="¿Dar de baja a Subdirector?"
@@ -1172,6 +1194,17 @@ export function DocentesView({ teachers, onUpdateTeacher, onDeleteTeacher }) {
       />
 
       {/* Confirm Delete User Docente Modal */}
+
+      <ConfirmActionModal
+        isOpen={!!pendingAction}
+        title="Confirmar asignación"
+        message={pendingAction?.message}
+        onConfirm={() => {
+          if (pendingAction?.action) pendingAction.action();
+        }}
+        onClose={() => setPendingAction(null)}
+      />
+
       <ConfirmDeleteModal
         isOpen={!!deletingUser}
         title="¿Dar de baja Cuenta de Docente?"
@@ -1527,21 +1560,24 @@ export function DocentesView({ teachers, onUpdateTeacher, onDeleteTeacher }) {
                   </div>
                   <button
                     type="button"
-                    onClick={async () => {
-                      if (window.confirm(`¿Estás seguro de quitar la asignación de ${selectedTeacherToMove.nombre}?`)) {
-                        try {
-                          if (selectedTeacherToMove.tipoDocente === 'Titular') {
-                            onUpdateTeacher(selectedTeacherToMove.key, { nombre: 'Sin docente asignado', observaciones: '—' });
+                    onClick={() => {
+                      setPendingAction({
+                        message: `¿Estás seguro de quitar la asignación de ${selectedTeacherToMove.nombre}?`,
+                        action: async () => {
+                          try {
+                            if (selectedTeacherToMove.tipoDocente === 'Titular') {
+                              onUpdateTeacher(selectedTeacherToMove.key, { nombre: 'Sin docente asignado', observaciones: '—' });
+                            }
+                            if (selectedTeacherToMove.username) {
+                              await updateUserGroupAndType(selectedTeacherToMove.username, '', '');
+                            }
+                            setShowReassignModal(false);
+                            setSelectedTeacherToMove(null);
+                          } catch (err) {
+                            alert('Error al quitar asignación: ' + err.message);
                           }
-                          if (selectedTeacherToMove.username) {
-                            await updateUserGroupAndType(selectedTeacherToMove.username, '', '');
-                          }
-                          setShowReassignModal(false);
-                          setSelectedTeacherToMove(null);
-                        } catch (err) {
-                          alert('Error al quitar asignación: ' + err.message);
                         }
-                      }
+                      });
                     }}
                     className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg font-black text-xs transition-all active:scale-95 shadow-sm"
                   >
@@ -1559,45 +1595,44 @@ export function DocentesView({ teachers, onUpdateTeacher, onDeleteTeacher }) {
                         <button
                           type="button"
                           disabled={!selectedTeacherToMove}
-                          onClick={async () => {
+                          onClick={() => {
                             if (!selectedTeacherToMove) return;
-                            if (window.confirm(`¿Asignar a ${selectedTeacherToMove.nombre} como Titular en el salón ${targetGrpKey}?`)) {
-                              try {
-                                // 1. Remove the target's current titular (if any) to avoid ghost assignments
-                                const currentTitularUser = (users || []).find(u => 
-                                  u.assignedGroup === targetGrpKey && u.tipoDocente === 'Titular' &&
-                                  ['docente', 'docenta', 'usaer'].includes((u.role || u.baseRole || '').toLowerCase().trim())
-                                );
-                                if (currentTitularUser && currentTitularUser.username !== selectedTeacherToMove.username) {
-                                  await updateUserGroupAndType(currentTitularUser.username, '', '');
+                            setPendingAction({
+                              message: `¿Asignar a ${selectedTeacherToMove.nombre} como Titular en el salón ${targetGrpKey}?`,
+                              action: async () => {
+                                try {
+                                  const currentTitularUser = (users || []).find(u => 
+                                    u.assignedGroup === targetGrpKey && u.tipoDocente === 'Titular' &&
+                                    ['docente', 'docenta', 'usaer'].includes((u.role || u.baseRole || '').toLowerCase().trim())
+                                  );
+                                  if (currentTitularUser && currentTitularUser.username !== selectedTeacherToMove.username) {
+                                    await updateUserGroupAndType(currentTitularUser.username, '', '');
+                                  }
+
+                                  if (selectedTeacherToMove.tipoDocente === 'Titular' && selectedTeacherToMove.key && selectedTeacherToMove.key !== 'Sin asignar') {
+                                    onUpdateTeacher(selectedTeacherToMove.key, { nombre: 'Sin docente asignado', observaciones: '—' });
+                                  }
+
+                                  onUpdateTeacher(targetGrpKey, {
+                                    nombre: selectedTeacherToMove.nombre,
+                                    email: selectedTeacherToMove.email || '',
+                                    matricula: selectedTeacherToMove.qrCode || '',
+                                    observaciones: `Docente Titular de ${targetGrpKey}`,
+                                    retardosAcumulados: selectedTeacherToMove.retardosAcumulados || 0
+                                  });
+
+                                  if (selectedTeacherToMove.username) {
+                                    await updateUserGroupAndType(selectedTeacherToMove.username, targetGrpKey, 'Titular');
+                                  }
+
+                                  setShowReassignModal(false);
+                                  setSelectedTeacherToMove(null);
+                                } catch (err) {
+                                  console.error('Error in Asignar Titular:', err);
+                                  alert('Error al asignar docente: ' + err.message);
                                 }
-
-                                // 2. If the moving teacher is currently a Titular somewhere else, clear that classroom's display
-                                if (selectedTeacherToMove.tipoDocente === 'Titular' && selectedTeacherToMove.key && selectedTeacherToMove.key !== 'Sin asignar') {
-                                  onUpdateTeacher(selectedTeacherToMove.key, { nombre: 'Sin docente asignado', observaciones: '—' });
-                                }
-
-                                // 3. Set the new Titular in the target classroom display
-                                onUpdateTeacher(targetGrpKey, {
-                                  nombre: selectedTeacherToMove.nombre,
-                                  email: selectedTeacherToMove.email || '',
-                                  matricula: selectedTeacherToMove.qrCode || '',
-                                  observaciones: `Docente Titular de ${targetGrpKey}`,
-                                  retardosAcumulados: selectedTeacherToMove.retardosAcumulados || 0
-                                });
-
-                                // 4. Update the user account in Firebase
-                                if (selectedTeacherToMove.username) {
-                                  await updateUserGroupAndType(selectedTeacherToMove.username, targetGrpKey, 'Titular');
-                                }
-
-                                setShowReassignModal(false);
-                                setSelectedTeacherToMove(null);
-                              } catch (err) {
-                                console.error('Error in Asignar Titular:', err);
-                                alert('Error al asignar docente: ' + err.message);
                               }
-                            }
+                            });
                           }}
                           className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-black transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                         >

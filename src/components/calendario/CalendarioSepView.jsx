@@ -643,7 +643,7 @@ export function CalendarioSepView() {
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(13);
     doc.setFont('helvetica', 'bold');
-    doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V', 115, 12, { align: 'center' });
+    doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)', 115, 12, { align: 'center' });
 
     doc.setFontSize(9);
     doc.setFont('helvetica', 'normal');
@@ -716,7 +716,7 @@ export function CalendarioSepView() {
 
     worksheet.mergeCells('A1:D1');
     const titleCell = worksheet.getCell('A1');
-    titleCell.value = '   ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V';
+    titleCell.value = '   ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)';
     titleCell.font = { name: 'Calibri', size: 14, bold: true, color: { argb: 'FFFFFFFF' } };
     titleCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1E3A8A' } };
     titleCell.alignment = { horizontal: 'center', vertical: 'middle' };
@@ -784,7 +784,7 @@ export function CalendarioSepView() {
               Calendario Escolar SEP — {calendarData.cycleName}
             </h1>
             <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-              Escuela Primaria Sor Juana Inés de la Cruz T.V
+              Escuela Primaria Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)
             </p>
           </div>
         </div>

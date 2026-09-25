@@ -296,7 +296,7 @@ export function QRScannerView({ students, users = [], onScanAttendance }) {
             Escáner Checador QR
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-semibold">
-            ⚡ Pase de lista automático para alumnos y docentes de la Primaria Sor Juana Inés de la Cruz.
+            ⚡ Pase de lista automático para alumnos y docentes de la Primaria Sor Juana Inés de la Cruz (CCT: 18DPR0087R).
           </p>
         </div>
 

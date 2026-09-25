@@ -99,7 +99,7 @@ export function AlumnoPortalView({ students, logs = [] }) {
       doc.setFontSize(8);
       doc.setFont('helvetica', 'bold');
       doc.text('ESCUELA PRIMARIA', 26, 9);
-      doc.text('Sor Juana Inés de la Cruz T.V', 26, 13);
+      doc.text('Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)', 26, 13);
 
       doc.setFontSize(6);
       doc.setFont('helvetica', 'normal');
@@ -270,7 +270,7 @@ export function AlumnoPortalView({ students, logs = [] }) {
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(13);
       doc.setFont('helvetica', 'bold');
-      doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V', 42, 16);
+      doc.text('ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)', 42, 16);
 
       doc.setFontSize(9);
       doc.setFont('helvetica', 'normal');
@@ -373,7 +373,7 @@ export function AlumnoPortalView({ students, logs = [] }) {
       // Title Block
       worksheet.mergeCells('B2:E2');
       const titleCell = worksheet.getCell('B2');
-      titleCell.value = 'ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V';
+      titleCell.value = 'ESCUELA PRIMARIA Sor Juana Inés de la Cruz T.V (CCT: 18DPR0087R)';
       titleCell.font = { name: 'Arial', size: 14, bold: true, color: { argb: '1E3A8A' } };
       titleCell.alignment = { vertical: 'middle', horizontal: 'left' };
 

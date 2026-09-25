@@ -38,7 +38,7 @@ export function Header({ onToggleSidebar }) {
         </div>
 
         <span className="text-xs font-bold tracking-wide text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800/80 border border-slate-200/60 dark:border-slate-700/50 px-3.5 py-1.5 rounded-xl hidden xl:inline-block font-outfit">
-          🏛️ Sistema Checador — Primaria Sor Juana Inés de la Cruz
+          🏛️ Sistema Checador — Primaria Sor Juana Inés de la Cruz (CCT: 18DPR0087R)
         </span>
       </div>
 
