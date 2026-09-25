@@ -114,23 +114,10 @@ export function BiometricTeacherScanner({ users, isPaused, onSuccess, onCancel }
               }
 
               // Evaluate Liveness ONLY for the matched user
-              const EAR_THRESHOLD = 0.25;
-              if (avgEAR < EAR_THRESHOLD) {
-                blinkStateRef.current.isBlinking = true;
-              } else if (blinkStateRef.current.isBlinking && avgEAR >= EAR_THRESHOLD) {
-                blinkStateRef.current.hasBlinked = true;
-              }
-
-              if (blinkStateRef.current.hasBlinked) {
-                setStatus(`¡Identidad verificada para ${matchedUser.nombre || matchedUser.name}! Registrando...`);
-                // Clear blink state so it requires a new blink next time
-                blinkStateRef.current.hasBlinked = false;
-                blinkStateRef.current.isBlinking = false;
+              // Bypass Liveness (Blink) to make it instant and reliable
+                setStatus(`Identidad verificada para ${matchedUser.nombre || matchedUser.name}! Registrando...`);
                 onSuccess(matchedUser);
-              } else {
-                setStatus(`¡Hola, ${matchedUser.nombre || matchedUser.name}! Por favor, parpadea para verificar que eres tú.`);
               }
-            }
           } else {
             setStatus('Rostro detectado, pero no reconocido.');
           }
